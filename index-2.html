@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Future moi</title>
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg">
+<meta name="theme-color" content="#0a1220">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1220;--card:#121d30;--tx:#eaf2ff;--mut:#8fa3bf;--pri:#38bdf8;--sl:#818cf8;--acc:#2dd4bf;--gold:#fbbf24;--ok:#34d399;--bd:#223149;--on:#0a1220;--r:16px;--font:"Space Grotesk","Segoe UI",system-ui,sans-serif;--fd:"Space Grotesk","Segoe UI",system-ui,sans-serif;--hero:linear-gradient(150deg,#5b21b6,#7c3aed 55%,#c026d3);--grad:linear-gradient(90deg,#38bdf8,#2dd4bf);--hair:#5a3825;--top:#38bdf8;--sh:none;--pig:#f472b6}
+section{border:0}
+header{display:flex;justify-content:space-between;align-items:center;font-size:1.3rem}header button{padding:6px 10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid2>section{min-width:0}
+.mc{cursor:pointer}.ch{display:flex;gap:6px;align-items:center;color:var(--mut);font-weight:700;font-size:.85rem;margin-bottom:8px}
+.ring{width:100%;max-width:130px;display:block;margin:auto}.chart{width:100%;display:block}
+.kpi{font-size:1.6rem;font-weight:800;margin:4px 0}.hero .bubble{margin-bottom:20px}
+section{box-shadow:var(--sh)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 var(--font);padding-top:env(safe-area-inset-top)}
+main{max-width:520px;margin:auto;padding:14px 14px 100px;display:grid;gap:14px}
+section{background:var(--card);border:2px solid var(--bd);border-radius:var(--r);padding:16px}
+h2{margin:0 0 10px;font-size:1.1rem}
+button{font:inherit;border:0;border-radius:calc(var(--r)*.6);padding:10px 14px;background:var(--pri);color:var(--on);font-weight:700;cursor:pointer}
+button.alt{background:var(--bd);color:var(--tx)}
+button:disabled{opacity:.4;cursor:default}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+input{font:inherit;padding:9px 10px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);min-width:0}
+.hero{display:flex;gap:6px;align-items:flex-end;background:var(--hero);border:0;color:#fff;padding-bottom:10px}
+.hero svg{width:150px;flex:none}
+.bob{animation:bob 2.4s ease-in-out infinite}.arm{transform-origin:94px 78px;animation:wave 1.6s ease-in-out infinite}
+.tail{transform-origin:96px 40px;animation:sway 2.2s ease-in-out infinite}.eyes{transform-origin:70px 44px;animation:blink 4.5s infinite}
+.spk{animation:pop 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}@keyframes wave{50%{transform:rotate(-20deg)}}
+@keyframes sway{50%{transform:rotate(8deg)}}@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@keyframes pop{50%{transform:scale(1.4);opacity:.5}}
+@media(prefers-reduced-motion:reduce){.bob,.arm,.tail,.eyes,.spk{animation:none}}
+.bubble{background:#fff;color:#2a1646;border-radius:18px 18px 18px 4px;padding:12px 14px;font-weight:700;flex:1;margin-bottom:24px}
+.dots{display:flex;gap:8px;margin:8px 0}
+.dot{flex:1;height:34px;border-radius:12px;background:var(--bd);display:grid;place-items:center;font-size:1.2rem;color:var(--on)}
+.dot.on{background:var(--ok)}.dot.jk{background:var(--gold)}
+.bar{height:14px;border-radius:9px;background:var(--bd);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--grad);transition:width .6s}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>input{flex:1 1 90px}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.chips button{background:var(--bd);color:var(--tx);padding:8px 2px;font-size:.78rem;display:grid;gap:2px;justify-items:center}
+.chips button span{font-size:1.5rem;line-height:1}.chips button.sel{background:var(--pri);color:var(--on)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.pills button{background:var(--bg);color:var(--tx);border:2px solid var(--bd);padding:8px 12px}
+.pills button.in{background:var(--ok);border-color:var(--ok);color:var(--on)}
+.pl{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.pl input{width:24px;height:24px;accent-color:var(--ok)}.pl span{flex:1}.pl.d span{text-decoration:line-through;color:var(--mut)}
+.pl button{padding:4px 9px;background:none;color:var(--mut)}
+.tag{font-size:.75rem;color:var(--mut)}
+.big{font-size:2.2rem;font-weight:800;color:var(--acc)}
+.mut{color:var(--mut);font-size:.9rem}
+.body{display:flex;gap:16px;align-items:center}.body svg{width:110px;flex:none}
+.ms{padding:8px 10px;border-radius:12px;margin:6px 0;background:var(--bg);color:var(--mut)}.ms.on{background:var(--bd);color:var(--tx);font-weight:700}
+.jarbox{display:flex;gap:14px;align-items:center}.jarbox svg{width:120px;flex:none}
+.wc{padding:10px 0;border-bottom:1px dashed var(--bd)}.wc .row{justify-content:space-between}
+.shelf{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gift{background:var(--bg);border:2px solid var(--bd);border-radius:14px;padding:10px 4px;text-align:center;font-size:.8rem}.gift b{display:block;font-size:1.6rem}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:2px solid var(--bd);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;background:none;color:var(--mut);border-radius:0;padding:9px 2px;font-size:.75rem;display:grid;gap:2px;justify-items:center}
+nav button span{font-size:1.4rem;line-height:1}nav button.on{color:var(--pri)}
+.big,.kpi,header b,h2,.bubble{font-family:var(--fd)}
+.ch.p{--c:var(--pri)}.ch.s{--c:var(--sl)}.ch.g{--c:var(--gold)}.ch.a{--c:var(--acc)}
+.ch{width:fit-content;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent);font:700 .82rem var(--fd);padding:5px 12px;border-radius:999px;margin-bottom:12px}
+.ic{width:20px;height:20px;display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}.ic .f{fill:currentColor;fill-opacity:.22;stroke:none}
+button{display:inline-flex;gap:8px;align-items:center;justify-content:center}
+nav button{display:grid}nav button span{display:grid;place-items:center}nav .ic{width:23px;height:23px}
+.chips .ic{width:26px;height:26px}.tag .ic{width:14px;height:14px;vertical-align:-2px}.ms .ic{width:16px;height:16px;margin-right:6px;vertical-align:-3px}
+.gift .ic{width:28px;height:28px;margin:0 auto 4px;display:block;color:var(--gold)}.dot .ic{width:18px;height:18px}
+.jarbox svg{width:170px}
+.stage{font:800 1.35rem/1.2 var(--fd);margin:4px 0 6px}
+.tr{display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px dashed var(--bd)}.tr>.ic{color:var(--pri);width:22px;height:22px}
+.seg{display:flex;gap:4px;margin:6px 0 4px}.seg i{flex:1;height:7px;border-radius:4px;background:var(--bd)}.seg i.on{background:var(--grad)}
+.pills button.alt{background:var(--bd)}
+textarea,select{font:inherit;padding:9px 10px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);min-width:0}textarea{width:100%;margin:8px 0}select{flex:1 1 120px}
+details summary{cursor:pointer;padding:6px 0}.vc{padding:12px 0;border-top:1px dashed var(--bd)}video{width:100%;border-radius:14px;background:#000;display:block}
+.step{display:grid;grid-template-columns:22px 1fr;gap:10px;position:relative;padding-bottom:14px}.step:not(:last-child)::before{content:"";position:absolute;left:10px;top:22px;bottom:0;width:2px;background:var(--bd)}
+.step .dotc{width:22px;height:22px;border-radius:50%;background:var(--bd);display:grid;place-items:center;font-size:.75rem;color:var(--mut)}.step .dotc .ic{width:12px;height:12px}
+.step.on .dotc{background:var(--acc);color:var(--on)}.step.on:not(:last-child)::before{background:var(--acc)}
+.sgm{display:flex;gap:4px;background:var(--card);padding:4px;border-radius:999px}.sgm button{flex:1;background:none;color:var(--mut);border-radius:999px;padding:8px 4px}.sgm button.on{background:var(--pri);color:var(--on)}
+nav.n6 button{font-size:.62rem;padding:9px 0}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 6px}.strip div{background:var(--bg);border-radius:14px;padding:8px 2px;text-align:center;cursor:pointer}.strip b{display:block;font:800 1.02rem var(--fd)}.strip span{font-size:.7rem;color:var(--mut)}
+.idv{--pri:#c084fc;--acc:#c084fc;--grad:linear-gradient(90deg,#a78bfa,#c084fc)}
+</style></head>
+<body><main id="app"></main><nav id="nav"></nav>
+<script>
+const NAV="six",FR="line";
+const K="futurmoi",Z=["Genoux","Dos","Abdos","Fessiers"],ZI={};
+const DZ={Genoux:[],Dos:[],Abdos:[],Fessiers:[]};
+const MS=[[0,"Départ : le plus dur, c’est de commencer. C’est fait"],[10,"Les premiers pas sont posés. Ton corps s’en souvient."],[25,"Un quart du chemin : la routine s’installe."],[50,"La moitié ! Tu te construis vraiment."],[75,"Ça se voit, ça se sent. Plus que le dernier sprint."],[100,"3 mois accomplis. Regarde ce que tu as construit."]];
+const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const dn=s=>{const[a,b,c]=s.split("-");return Date.UTC(a,b-1,c)/864e5};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const DEF={start:ymd(new Date()),per:5,s:[],spent:0,wish:[],bought:[],tab:"day",sl:{},words:[],goal:8,books:[],rd:10,rl:{},sx:[],sgoal:3,sub:"seance",sz:"Tous",ss:"seance",fav:[],mode:"kine",me:[],sq:3,z:"Fessiers",ze:{},plan:[],pd:""};
+let st;try{st=Object.assign({},JSON.parse(JSON.stringify(DEF)),JSON.parse(localStorage.getItem(K)||"{}"))}catch(e){st=JSON.parse(JSON.stringify(DEF))}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}};
+const today=()=>ymd(new Date());
+if(st.pd!==today()){st.plan=[];st.pd=today()}
+const BOOK1={id:1,t:"Passer à l’essentiel",a:"Gary Keller (avec Jay Papasan)",pages:251,read:0,done:"",g:"Apprendre à repérer ta priorité n°1, à arrêter de te disperser et à protéger du temps pour ce qui compte vraiment.",ideas:[
+"L’effet domino : un grand résultat naît d’une petite action bien choisie, qui en entraîne d’autres.",
+"Tout ne compte pas autant : quelques actions pèsent bien plus que les autres. On part d’une liste de priorités, pas d’une liste de tâches.",
+"Le multitâche est un mythe : sauter d’une chose à l’autre fait perdre du temps et de la qualité.",
+"La discipline à plein temps n’existe pas : mieux vaut installer une seule habitude à la fois, pendant environ deux mois.",
+"La volonté s’use au fil de la journée : fais ta chose la plus importante en premier, quand tu es au top.",
+"Une vie parfaitement équilibrée est un mirage : on choisit ses priorités du moment et on accepte un léger déséquilibre.",
+"Voir grand : une ambition limitée par la peur freine. Vise haut pour t’obliger à progresser.",
+"La question de concentration : quelle est LA chose qui, une fois faite, rend tout le reste plus facile ou inutile ?",
+"Vivre avec un but, une priorité et de la productivité : partir de ce qui compte, puis le ramener à l’action de maintenant.",
+"Bloquer du temps : réserve chaque jour des heures protégées pour ton essentiel, avant tout le reste.",
+"Les quatre voleurs de productivité : dire oui à tout, craindre le chaos, négliger sa santé, vivre dans un environnement qui ne te soutient pas.",
+"La maîtrise : progresser par une pratique répétée et réfléchie, sur la durée."]};
+if(!st.seed1){if(!st.books.some(b=>/essentiel/i.test(b.t)))st.books.push(BOOK1);st.seed1=1}
+st.wish.forEach((x,i)=>{if(!x.id)x.id=Date.now()+i});
+
+const lst=z=>DZ[z].concat(st.ze[z]||[]);
+const wk=s=>Math.floor((dn(s)-dn(st.start))/7),cw=()=>Math.max(0,wk(today()));
+const inWeek=w=>st.s.filter(x=>wk(x.d)===w);
+const doneToday=()=>st.s.some(x=>x.d===today()&&!x.j);
+const earned=()=>st.s.filter(x=>!x.j).length*st.per,bal=()=>earned()-st.spent;
+const pct=()=>Math.min(100,st.s.length/48*100);
+const MSG=["Aujourd’hui, on avance d’un pas. Un seul.","Je suis toi dans 3 mois, et je te remercie déjà.","Même 10 minutes, ça compte. Promis.","Ton corps se construit séance après séance.","Choisis ce qui te fait envie aujourd’hui, on fait ça ensemble.","Ton futur corps est fier de toi.","Petit à petit, ça dessine tout ça."];
+function say(){const w=inWeek(cw()).length;
+ if(doneToday())return "Séance faite ! Je suis trop fière de toi";
+ if(w>=4)return "Objectif de la semaine atteint, tu assures !";
+ if(!st.s.length)return "Coucou, c’est moi, ta future toi. On commence quand tu veux";
+ return MSG[dn(today())%MSG.length]}
+function face(){const p=pct(),h=doneToday()||inWeek(cw()).length>=4;
+ return `<svg viewBox="0 0 140 160" aria-hidden="true"><g class="bob">
+${p>=75?`<circle cx="70" cy="80" r="62" fill="var(--gold)" opacity=".22"/><circle cx="70" cy="80" r="48" fill="var(--gold)" opacity=".18"/>`:""}
+<ellipse cx="70" cy="152" rx="34" ry="4" fill="#0003"/>
+<g class="tail"><path d="M92 34c24 0 30 26 16 50c-1-16-8-26-22-30z" fill="var(--hair)"/></g>
+<rect x="54" y="104" width="12" height="40" rx="6" fill="#f2c4a2"/><rect x="74" y="104" width="12" height="40" rx="6" fill="#f2c4a2"/>
+<rect x="50" y="140" width="20" height="9" rx="4" fill="#fff"/><rect x="70" y="140" width="20" height="9" rx="4" fill="#fff"/>
+<rect x="48" y="62" width="44" height="50" rx="18" fill="var(--top)"/>
+<rect x="38" y="66" width="12" height="34" rx="6" fill="#f2c4a2" transform="rotate(8 44 66)"/>
+${p>=25?`<rect x="38" y="90" width="13" height="7" rx="3" fill="var(--gold)" transform="rotate(8 44 66)"/>`:""}
+<g class="arm"><rect x="90" y="64" width="12" height="36" rx="6" fill="#f2c4a2" transform="rotate(-8 96 66)"/>
+${p>=50?`<rect x="85" y="99" width="22" height="5" rx="2" fill="#555"/><rect x="83" y="95" width="6" height="13" rx="2" fill="#333"/><rect x="103" y="95" width="6" height="13" rx="2" fill="#333"/>`:""}</g>
+${p>=100?`<circle cx="70" cy="86" r="7" fill="var(--gold)" stroke="#fff" stroke-width="2"/>`:""}
+<path d="M40 40c0-22 14-30 30-30s30 8 30 30v14c0 6-4 10-8 8V42H48v20c-4 2-8-2-8-8z" fill="var(--hair)"/>
+<circle cx="70" cy="42" r="24" fill="#f2c4a2"/>
+<path d="M46 36c4-14 14-18 24-18s20 4 24 18c-8-8-16-10-24-10s-16 2-24 10z" fill="var(--hair)"/>
+<rect x="45" y="30" width="50" height="6" rx="3" fill="var(--gold)"/>
+<g class="eyes"><ellipse cx="61" cy="44" rx="3" ry="${h?2:3.4}" fill="#2a1646"/><ellipse cx="79" cy="44" rx="3" ry="${h?2:3.4}" fill="#2a1646"/></g>
+<circle cx="55" cy="52" r="4" fill="#ff5fa2" opacity=".45"/><circle cx="85" cy="52" r="4" fill="#ff5fa2" opacity=".45"/>
+<path d="${h?"M61 53q9 11 18 0z":"M63 54q7 5 14 0"}" fill="${h?"#fff":"none"}" stroke="#2a1646" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>${h?`<g transform="translate(18 38)"><path class="spk" d="M0-8L2.2-2.2 8 0 2.2 2.2 0 8-2.2 2.2-8 0-2.2-2.2z" fill="var(--gold)"/></g><g transform="translate(120 24)"><path class="spk" d="M0-6L1.6-1.6 6 0 1.6 1.6 0 6-1.6 1.6-6 0-1.6-1.6z" fill="var(--acc)"/></g>`:""}</svg>`}
+function silhouette(p){const sh=`<circle cx="50" cy="22" r="14"/><rect x="32" y="40" width="36" height="58" rx="16"/><rect x="19" y="44" width="11" height="52" rx="5.5"/><rect x="70" y="44" width="11" height="52" rx="5.5"/><rect x="34" y="92" width="14" height="92" rx="7"/><rect x="52" y="92" width="14" height="92" rx="7"/>`,h=Math.round(190*p/100);
+ return `<svg viewBox="0 0 100 190" role="img" aria-label="Jauge de corps à ${Math.round(p)} %"><defs><clipPath id="bc">${sh}</clipPath><linearGradient id="bg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="var(--acc)"/><stop offset="1" stop-color="var(--gold)"/></linearGradient></defs><g fill="var(--bd)">${sh}</g><rect x="0" y="${190-h}" width="100" height="${h}" fill="url(#bg)" clip-path="url(#bc)"/></svg>`}
+function jar(p){const h=Math.round(110*p/100),P={tail:'<ellipse cx="141" cy="62" rx="8.5" ry="12.5"/>',legs:'<rect x="44" y="98" width="28" height="21" rx="10"/><rect x="100" y="98" width="28" height="21" rx="10"/>',body:'<ellipse cx="84" cy="68" rx="56" ry="44"/>',snout:'<rect x="11" y="58" width="36" height="34" rx="13"/>',ear:'<path d="M54 36L57 13Q59 7 64 12Q78 28 98 36z"/>'},all=Object.values(P).join("");
+ return `<svg viewBox="0 0 160 124" role="img" aria-label="Tirelire remplie à ${Math.round(p)} %"><defs><clipPath id="pc">${all}</clipPath><radialGradient id="ph" cx=".3" cy=".25" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+<g fill="#efbdd3">${P.tail}${P.legs}</g><g fill="#f9d7e6">${P.body}${P.snout}${P.ear}</g>
+<g clip-path="url(#pc)"><rect x="0" y="${119-h}" width="170" height="${h}" fill="var(--pig)" style="transition:all .6s"/></g>
+<ellipse cx="70" cy="46" rx="34" ry="22" fill="url(#ph)"/>
+<path d="M54 56Q52 40 64 38Q78 38 76 60Q72 74 62 80Q54 72 54 56z" fill="#e9a9c6" fill-opacity=".55"/>
+<rect x="70" y="33" width="36" height="6" rx="3" fill="#d86a9f" transform="rotate(3 88 36)"/>
+<ellipse cx="42" cy="55" rx="3.4" ry="5.2" fill="#1d1d2b" transform="rotate(-12 42 55)"/>
+<g class="bob"><circle cx="100" cy="13" r="9" fill="var(--gold)"/><circle cx="100" cy="13" r="6" fill="none" stroke="#fff" stroke-opacity=".5"/><text x="100" y="16.5" text-anchor="middle" font-size="9" font-weight="800" fill="#0e0f13">€</text></g></svg>`}
+const IC={
+home:{f:['<path d="M5 11l7-6 7 6v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/>'],o:['<path d="M4 12l8-7 8 7M9.5 20v-5h5v5M6 11v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8"/>']},
+dumbbell:{f:['<rect x="3" y="9" width="3.5" height="6" rx="1.2"/>','<rect x="17.5" y="9" width="3.5" height="6" rx="1.2"/>'],o:['<path d="M6.5 12h11M8.5 7.5v9M15.5 7.5v9M3 9.5v5M21 9.5v5"/>']},
+trend:{f:['<path d="M4 18l5-6 4 3 7-9v14H4z"/>'],o:['<path d="M4 18l5-6 4 3 7-9M15 6h5v5"/>']},
+moon:{f:['<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'],o:['<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>']},
+coin:{f:['<circle cx="12" cy="12" r="8.5"/>'],o:['<circle cx="12" cy="12" r="8.5"/>','<path d="M14.6 9.3c-.6-.8-1.5-1.3-2.6-1.3-1.7 0-2.9 1.5-2.9 4s1.2 4 2.9 4c1.1 0 2-.5 2.6-1.3M8 11h5M8 13h5"/>']},
+gear:{f:['<circle cx="12" cy="12" r="6"/>'],o:['<circle cx="12" cy="12" r="3"/>','<path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/>']},
+knee:{f:['<circle cx="12" cy="12" r="3.2"/>'],o:['<path d="M8 3l4 9-3 9"/>','<circle cx="12" cy="12" r="3.2"/>']},
+back:{f:['<rect x="8" y="3.5" width="8" height="4" rx="2"/>','<rect x="7" y="10" width="10" height="4" rx="2"/>','<rect x="8" y="16.5" width="8" height="4" rx="2"/>'],o:['<rect x="8" y="3.5" width="8" height="4" rx="2"/>','<rect x="7" y="10" width="10" height="4" rx="2"/>','<rect x="8" y="16.5" width="8" height="4" rx="2"/>']},
+abs:{f:['<rect x="6" y="3.5" width="5" height="4.5" rx="1.6"/>','<rect x="13" y="3.5" width="5" height="4.5" rx="1.6"/>','<rect x="6" y="9.8" width="5" height="4.5" rx="1.6"/>','<rect x="13" y="9.8" width="5" height="4.5" rx="1.6"/>','<rect x="6" y="16" width="5" height="4.5" rx="1.6"/>','<rect x="13" y="16" width="5" height="4.5" rx="1.6"/>'],o:['<rect x="6" y="3.5" width="5" height="4.5" rx="1.6"/>','<rect x="13" y="3.5" width="5" height="4.5" rx="1.6"/>','<rect x="6" y="9.8" width="5" height="4.5" rx="1.6"/>','<rect x="13" y="9.8" width="5" height="4.5" rx="1.6"/>','<rect x="6" y="16" width="5" height="4.5" rx="1.6"/>','<rect x="13" y="16" width="5" height="4.5" rx="1.6"/>']},
+glutes:{f:['<circle cx="8.5" cy="12" r="5"/>','<circle cx="15.5" cy="12" r="5"/>'],o:['<circle cx="8.5" cy="12" r="5"/>','<circle cx="15.5" cy="12" r="5"/>']},
+cards:{f:['<rect x="6" y="3" width="12" height="18" rx="2.5"/>'],o:['<rect x="6" y="3" width="12" height="18" rx="2.5"/>','<path d="M12 8.5l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z"/>']},
+gift:{f:['<rect x="4" y="9" width="16" height="11" rx="2"/>'],o:['<rect x="4" y="9" width="16" height="11" rx="2"/>','<path d="M3 9h18M12 9v11M12 9c-1.5-4-5-4-5-1.8 0 1.2 2 1.8 5 1.8zM12 9c1.5-4 5-4 5-1.8 0 1.2-2 1.8-5 1.8z"/>']},
+lock:{f:['<rect x="5" y="11" width="14" height="9" rx="2"/>'],o:['<rect x="5" y="11" width="14" height="9" rx="2"/>','<path d="M8 11V8a4 4 0 0 1 8 0v3"/>']},
+star:{f:['<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>'],o:['<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>']},
+heart:{f:['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'],o:['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>']},
+book:{f:['<path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/>'],o:['<path d="M5 17V4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h10"/>']},
+stretch:{f:['<circle cx="12" cy="4.5" r="2.2"/>'],o:['<circle cx="12" cy="4.5" r="2.2"/>','<path d="M12 7.5v7M6 3.5l6 5 6-5M9 21l3-6.5 3 6.5"/>']},
+bolt:{f:['<path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/>'],o:['<path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/>']}};
+[["f1","M8.5 16.5c1.2-2 5.8-2 7 0"],["f2","M9 16c1-1 4-1 6 0"],["f3","M9 15.5h6"],["f4","M8.5 14c1.2 2 5.8 2 7 0"],["f5","M8 13.5c1 4 7 4 8 0z"]].forEach(([k,m])=>{IC[k]={f:['<circle cx="12" cy="12" r="9"/>'],o:['<circle cx="12" cy="12" r="9"/>','<circle cx="9" cy="10" r=".7"/>','<circle cx="15" cy="10" r=".7"/>','<path d="'+m+'"/>']}});
+const ic=n=>{const d=IC[n];return `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${(d.f||[]).map(e=>e.replace("/>",' class="f"/>')).join("")}${d.o.join("")}</svg>`};
+Object.assign(ZI,{Genoux:ic("knee"),Dos:ic("back"),Abdos:ic("abs"),Fessiers:ic("glutes"),Muscu:ic("dumbbell")});
+const fmtH=h=>Math.floor(h)+"h"+String(Math.round(h%1*60)).padStart(2,"0");
+const dstr=o=>ymd(new Date(Date.now()-o*864e5));
+const lastSleep=()=>{const k=Object.keys(st.sl).sort().pop();return k?Object.assign({d:k},st.sl[k]):null};
+const go=t=>{if(NAV==="dom"&&["seance","stretch","sleep"].includes(t)){st.sub=t;t="body"}st.tab=t;save();render();scrollTo(0,0)};
+const ring=(p,t,s,c)=>{const C=2*Math.PI*40,o=C*(1-Math.min(100,p)/100);return `<svg viewBox="0 0 100 100" class="ring" role="img" aria-label="${t} ${s}"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--bd)" stroke-width="9"/><circle cx="50" cy="50" r="40" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${o}" transform="rotate(-90 50 50)" style="transition:stroke-dashoffset .6s"/><text x="50" y="53" text-anchor="middle" font-size="21" font-weight="800" fill="var(--tx)">${t}</text><text x="50" y="68" text-anchor="middle" font-size="9" fill="var(--mut)">${s}</text></svg>`};
+const bars=(v,mx,goal,lb,col)=>{const W=300,H=100,n=v.length,bw=W/n;return `<svg viewBox="0 0 ${W} ${H+16}" class="chart" role="img" aria-label="Graphique">${goal!=null?`<line x1="0" x2="${W}" y1="${H-goal/mx*H}" y2="${H-goal/mx*H}" stroke="var(--mut)" stroke-dasharray="4 4" opacity=".6"/>`:""}${v.map((x,i)=>{const h=x?Math.max(3,Math.min(x,mx)/mx*H):0;return `<rect x="${i*bw+bw*.16}" y="${H-h}" width="${bw*.68}" height="${h}" rx="4" fill="${col}"/><text x="${i*bw+bw/2}" y="${H+12}" text-anchor="middle" font-size="9" fill="var(--mut)">${lb[i]}</text>`}).join("")}</svg>`};
+function vSeanceMain(){const w=cw(),ws=inWeek(w),n=ws.length,uj=ws.some(x=>x.j),z=st.z,L=lst(z);
+ const dots=[0,1,2,3].map(i=>{const x=ws[i];return `<div class="dot ${x?(x.j?"jk":"on"):""}">${x?(x.j?ic("cards"):"✓"):""}</div>`}).join("");
+ const chips=Z.map(k=>`<button class="${k===z?"sel":""}" onclick="st.z='${k}';save();render()"><span>${ZI[k]}</span>${k}</button>`).join("");
+ const pills=L.map((e,i)=>{const inn=st.plan.some(x=>x.z===z&&x.e===e);return `<button class="${inn?"in":""}" onclick="add('${z}',${i})">${inn?"✓ ":"+ "}${esc(e)}</button>`}).join("");
+ const plan=st.plan.map((x,i)=>`<div class="pl ${x.d?"d":""}"><input type="checkbox" ${x.d?"checked":""} onchange="tg(${i})" aria-label="Fait"><span>${esc(x.e)} <i class="tag">${ZI[x.z]} ${x.z}</i></span><button onclick="rm(${i})" aria-label="Retirer">✕</button></div>`).join("")||`<p class="mut">Choisis des exos ci-dessus : ta séance se construit ici.</p>`;
+ const nd=st.plan.filter(x=>x.d).length;
+ return `<section><div class="ch p">Semaine ${Math.min(w+1,12)} sur 12</div><div class="dots">${dots}</div><p class="mut">${n}/4 séances${uj?" (joker utilisé)":""}</p><button class="alt" ${uj||n>=4?"disabled":""} onclick="joker()">${ic("cards")} Utiliser mon joker (1 par semaine)</button></section>
+<section><div class="ch p">Je compose ma séance</div><div class="sgm" style="margin-bottom:10px"><button class="${st.mode!=="muscu"?"on":""}" onclick="st.mode='kine';save();render()">Kiné</button><button class="${st.mode==="muscu"?"on":""}" onclick="st.mode='muscu';save();render()">Muscu</button></div>${st.mode==="muscu"?muscu():`<div class="chips">${chips}</div>${pills?`<div class="pills">${pills}</div>`:`<p class="mut" style="margin-top:0">Aucun exo pour cette zone : ajoute les tiens ci-dessous.</p>`}<div class="row"><input id="ne" placeholder="Mon propre exo (${z})"><button class="alt" onclick="addC()">Ajouter</button></div>${L.length?`<details><summary class="mut">Gérer ma liste</summary>${L.map((e,i)=>`<div class="row" style="justify-content:space-between;padding:4px 0"><span>${esc(e)}</span><button class="alt" onclick="delK(${i})" aria-label="Retirer de ma liste">✕</button></div>`).join("")}</details>`:""}`}</section>
+<section><div class="ch p">Ma séance du jour</div>${plan}<p style="margin-top:12px"><button onclick="done()" ${nd?"":"disabled"} style="width:100%">Séance terminée${nd?" · "+nd+" exo"+(nd>1?"s":""):""} (+${st.per} €)</button></p></section>`}
+function vProg(){const p=pct(),tot=st.s.length;let full=0;const wv=[],wl=[];for(let i=0;i<12;i++){wv.push(i<=cw()?inWeek(i).length:0);wl.push("S"+(i+1));if(i<=cw()&&inWeek(i).length>=4)full++}
+ const cur=MS.filter(m=>p>=m[0]).length-1,ms=MS.map(m=>`<div class="ms ${p>=m[0]?"on":""}">${p>=m[0]?m[1]:ic("lock")+" Se débloque à "+m[0]+" %"}</div>`).join("");
+ const cnt=Z.concat(["Muscu"]).map(k=>[k,st.s.reduce((a,x)=>a+(x.e||[]).filter(y=>y.z===k).length,0)]),mx=Math.max(1,...cnt.map(c=>c[1]));
+ return `${vId()}<section><div class="ch a">Mon corps en construction</div><div class="body">${silhouette(p)}<div><div class="big">${Math.round(p)} %</div><p class="mut">${tot} séances sur 48<br>${full} semaine${full>1?"s":""} complète${full>1?"s":""}</p><p><b>${MS[cur][1]}</b></p></div></div></section>
+<section><div class="ch p">Séances par semaine</div>${bars(wv,5,4,wl,"var(--pri)")}<p class="mut">Ligne pointillée : objectif de 4</p></section>
+<section><div class="ch a">Messages débloqués</div><p class="mut" style="margin-top:0">Un message se débloque à chaque palier de ton défi : 10 %, 25 %, 50 %, 75 % et 100 % (environ 5, 12, 24, 36 et 48 séances). Les suivants restent verrouillés jusqu’à ce que tu les atteignes.</p>${ms}</section>
+<section><div class="ch a">Ce que j’ai travaillé</div><p class="mut" style="margin-top:0">${st.s.filter(x=>(x.e||[]).some(y=>y.z!=="Muscu")).length} séances avec kiné · ${st.s.filter(x=>(x.e||[]).some(y=>y.z==="Muscu")).length} avec muscu</p>${cnt.map(c=>`<p style="margin:8px 0"><span>${ZI[c[0]]} ${c[0]}</span> <b>${c[1]}</b><span class="bar" style="display:block;margin-top:4px"><i style="display:block;width:${c[1]/mx*100}%"></i></span></p>`).join("")}</section>`}
+function vSleep(){const ds=[];for(let i=13;i>=0;i--)ds.push(dstr(i));const v=ds.map(d=>st.sl[d]?st.sl[d].h:0),lb=ds.map(d=>d.slice(8));
+ const last7=ds.slice(7).map(d=>st.sl[d]).filter(Boolean),avg=last7.length?last7.reduce((a,x)=>a+x.h,0)/last7.length:0,best=Object.values(st.sl).reduce((a,x)=>Math.max(a,x.h),0);
+ const Q=[1,2,3,4,5].map(n=>ic("f"+n)),ln=lastSleep();
+ return `<section><div class="ch s">Ajouter une nuit</div><div class="row"><input id="sdt" type="date" value="${dstr(0)}" aria-label="Date du réveil"><input id="sh" type="number" step="0.25" min="0" max="16" placeholder="Heures (ex. 7.5)"></div>
+<p class="mut" style="margin:10px 0 6px">Comment tu t’es sentie au réveil ?</p><div class="row">${Q.map((q,i)=>`<button class="${st.sq===i+1?"":"alt"}" onclick="st.sq=${i+1};save();render()" aria-label="Qualité ${i+1} sur 5">${q}</button>`).join("")}</div>
+<p style="margin-top:12px"><button onclick="saveSleep()" style="width:100%">Enregistrer la nuit</button></p></section>
+<div class="grid2"><section><div class="ch s">Moyenne 7 jours</div>${ring(avg/st.goal*100,avg?fmtH(avg):"–","sur "+st.goal+" h","var(--sl)")}</section>
+<section><div class="ch s">Dernière nuit</div><div class="kpi">${ln?fmtH(ln.h):"–"}</div><p class="mut">${ln?Q[(ln.q||3)-1]+" · "+ln.d.slice(5).split("-").reverse().join("/"):"Rien d’enregistré"}</p><p class="mut">Meilleure : ${best?fmtH(best):"–"}</p></section></div>
+<section><div class="ch s">14 dernières nuits</div>${bars(v,10,st.goal,lb,"var(--sl)")}<p class="mut">Ligne pointillée : ton objectif de ${st.goal} h</p></section>`}
+function saveSleep(){const d=document.getElementById("sdt").value,h=parseFloat(document.getElementById("sh").value);if(!d||!(h>=0))return;st.sl[d]={h,q:st.sq};save();render()}
+function vSet(){return `<section><div class="ch p">Réglages</div><div class="row"><label>€ par séance <input type="number" min="0" value="${st.per}" style="width:80px" onchange="st.per=+this.value||0;save();render()"></label><label>Objectif sommeil (h) <input type="number" step="0.5" min="4" max="12" value="${st.goal}" style="width:80px" onchange="st.goal=+this.value||8;save();render()"></label></div>
+<div class="row"><label>Pages par jour <input type="number" min="1" value="${st.rd}" style="width:80px" onchange="st.rd=+this.value||10;save();render()"></label><label>Étirements (jours/sem.) <input type="number" min="1" max="7" value="${st.sgoal}" style="width:80px" onchange="st.sgoal=+this.value||3;save();render()"></label></div><p class="mut">Début du défi : ${st.start}</p><div class="row"><input id="sd" type="date" value="${st.start}"><button class="alt" onclick="st.start=document.getElementById('sd').value||st.start;save();render()">Changer</button></div>
+<p><button class="alt" onclick="if(confirm('Tout remettre à zéro ?')){st=JSON.parse(JSON.stringify(DEF));save();render()}">Recommencer le défi</button></p><p><button class="alt" onclick="go('day')">← Retour</button></p></section>`}
+
+const FW=()=>{let n=0;for(let i=0;i<=Math.min(cw(),11);i++)if(inWeek(i).length>=4)n++;return n};
+const ID=[
+{k:"Sportive",l:"Sportive",i:"dumbbell",t:[1,5,15,30,48],v:()=>st.s.filter(x=>!x.j).length,u:["séance","séances"]},
+{k:"Déterminée",l:"Déterminée",i:"bolt",t:[1,2,4,8,12],v:FW,u:["semaine complète","semaines complètes"]},
+{k:"Je prends soin de moi",l:"Soin",i:"heart",t:[1,5,14,30,60],v:()=>Object.keys(st.sl).length,u:["nuit enregistrée","nuits enregistrées"]},
+{k:"Je me fais plaisir",l:"Plaisir",i:"gift",t:[1,2,4,6,10],v:()=>st.bought.length,u:["cadeau","cadeaux"]},
+{k:"Curieuse",l:"Curieuse",i:"star",t:[1,4,8,14,20],v:()=>{const m={};st.s.forEach(x=>(x.e||[]).forEach(y=>m[y.z+y.e]=1));return Object.keys(m).length},u:["exo différent","exos différents"]},
+{k:"Lectrice",l:"Lectrice",i:"book",t:[1,50,200,500,1000],v:()=>totPages(),u:["page","pages"]},
+{k:"Souple",l:"Souple",i:"stretch",t:[1,4,10,20,40],v:()=>st.sx.length,u:["étirement","étirements"]}];
+const ID_ST=[[0,"Celle qui se remet en mouvement"],[10,"Celle qui revient"],[25,"Une sportive en construction"],[50,"Une sportive régulière"],[75,"Une athlète dans l’âme"],[100,"Celle qui l’a fait"]];
+const SUG=["sportive","déterminée","forte","fière","constante","douce avec moi"];
+const lv=o=>{const v=o.v(),l=o.t.filter(x=>v>=x).length,a=l?o.t[l-1]:0;return{v,l,fr:(l+(l<5?(v-a)/(o.t[l]-a):0))/5,need:l<5?o.t[l]-v:0}};
+const idStage=()=>ID_ST.filter(m=>ovr()>=m[0]).pop()[1];
+function radar(){const N=ID.length,R=66,C=110,pt=(i,f)=>{const a=(-90+360/N*i)*Math.PI/180;return[+(C+Math.cos(a)*R*f).toFixed(1),+(C+Math.sin(a)*R*f).toFixed(1)]};
+ const rings=[.2,.4,.6,.8,1].map(f=>`<polygon points="${ID.map((_,i)=>pt(i,f).join(",")).join(" ")}" fill="none" stroke="var(--bd)"/>`).join("");
+ const ax=ID.map((_,i)=>{const p=pt(i,1);return `<line x1="${C}" y1="${C}" x2="${p[0]}" y2="${p[1]}" stroke="var(--bd)"/>`}).join("");
+ const pts=ID.map((o,i)=>pt(i,Math.max(.07,lv(o).fr)));
+ const labs=ID.map((o,i)=>{const p=pt(i,1.3);return `<text x="${p[0]}" y="${p[1]+3}" text-anchor="middle" font-size="10" fill="var(--mut)">${o.l}</text>`}).join("");
+ return `<svg viewBox="0 0 220 220" class="chart" style="max-width:300px;margin:6px auto" role="img" aria-label="Radar de mon identité">${rings}${ax}<polygon points="${pts.map(p=>p.join(",")).join(" ")}" fill="var(--pri)" fill-opacity=".3" stroke="var(--pri)" stroke-width="2" stroke-linejoin="round"/>${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="var(--pri)"/>`).join("")}${labs}</svg>`}
+function vId(short){const rows=ID.map(o=>{const r=lv(o);return `<div class="tr">${ic(o.i)}<div><b>${o.k}</b><div class="seg">${[1,2,3,4,5].map(n=>`<i class="${r.l>=n?"on":""}"></i>`).join("")}</div><div class="mut">${r.l<5?`Encore ${r.need} ${o.u[r.need>1?1:0]} pour le niveau ${r.l+1}`:"Niveau maximum atteint"}</div></div><b>${r.l}/5</b></div>`}).join("");
+ const top=short?"":`<p class="mut" style="margin:0">Tu es en train de devenir</p><div class="stage">${idStage()}</div>`;
+ const main=`<section class="idv"><div class="ch a">Mon identité</div>${top}${radar()}${rows}</section>`;
+ if(short)return main;
+ const words=st.words.map((w,i)=>`<button class="alt" onclick="rmW(${i})" aria-label="Retirer ${esc(w)}">${esc(w)} ✕</button>`).join("");
+ const sug=SUG.filter(w=>!st.words.includes(w)).map(w=>`<button onclick="addWd('${w}')">+ ${w}</button>`).join("");
+ return main+`
+<section class="idv"><div class="ch a">Mes mots</div><p class="mut" style="margin-top:0">Complète : « Je suis… »</p>${words?`<div class="pills">${words}</div>`:""}<div class="pills">${sug}</div><div class="row"><input id="nw" placeholder="Ton propre mot"><button class="alt" onclick="addWd()">Ajouter</button></div></section>`}
+function addWd(w){w=(w||document.getElementById("nw").value).trim();if(!w||st.words.includes(w))return;st.words=st.words.concat([w]);save();render()}
+function rmW(i){st.words=st.words.filter((_,j)=>j!==i);save();render()}
+const NAVS={six:[["day","trend","Évolution"],["seance","dumbbell","Séance"],["read","book","Lecture"],["stretch","stretch","Étirements"],["sleep","moon","Sommeil"]],
+dom:[["day","home","Journée"],["body","dumbbell","Corps"],["read","book","Esprit"],["prog","trend","Progrès"]],
+five:[["day","home","Journée"],["seance","dumbbell","Séance"],["read","book","Lecture"],["stretch","stretch","Étirements"],["prog","trend","Progrès"]]};
+const rdToday=()=>st.rl[today()]||0;
+const totPages=()=>Object.values(st.rl).reduce((a,x)=>a+x,0);
+const rdStreak=()=>{let n=0,o=rdToday()>=st.rd?0:1;for(;o<400;o++){if((st.rl[dstr(o)]||0)>=st.rd)n++;else break}return n};
+const strWeek=()=>new Set(st.sx.filter(x=>wk(x.d)===cw()).map(x=>x.d)).size;
+const ovr=()=>ID.reduce((a,o)=>a+lv(o).fr,0)/ID.length*100;
+let VID=null;const vr=()=>{if(st.tab==="stretch"||st.tab==="body")render()};
+if(typeof fetch==="function")fetch("etirements.json").then(r=>r.ok?r.json():[]).then(j=>{VID=Array.isArray(j)?j:[];vr()}).catch(()=>{VID=[];vr()});
+function frise(){const p=Math.min(100,ovr())/100,pos=t=>({x:26+250*t,y:FR==="climb"?104-48*t:FR==="wave"?76+12*Math.sin(t*Math.PI*3):76});
+ const path=(a,b,n)=>{let d="";for(let i=0;i<=n;i++){const q=pos(a+(b-a)*i/n);d+=(i?"L":"M")+q.x.toFixed(1)+" "+q.y.toFixed(1)}return d};
+ const c=pos(p),e=pos(1),ms=[.1,.25,.5,.75].map(t=>{const q=pos(t),on=p>=t;return `<circle cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" r="4.5" fill="${on?"var(--gold)":"var(--card)"}" stroke="${on?"var(--gold)":"var(--bd)"}" stroke-width="2"/>`}).join("");
+ const me=face().replace('<svg viewBox="0 0 140 160" aria-hidden="true">',`<svg x="${(c.x-23).toFixed(1)}" y="${(c.y-50).toFixed(1)}" width="46" height="52" viewBox="0 0 140 160" overflow="visible" aria-hidden="true">`);
+ return `<section><svg viewBox="0 0 320 120" class="chart" role="img" aria-label="Ma frise vers la moi du futur"><path d="${path(0,1,48)}" fill="none" stroke="var(--bd)" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 9"/><path d="${path(0,p||.001,24)}" fill="none" stroke="var(--pri)" stroke-width="4" stroke-linecap="round"/>${ms}
+<g transform="translate(${e.x.toFixed(1)} ${e.y.toFixed(1)})"><circle cy="-22" r="22" fill="var(--gold)" opacity=".15"/><g fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="3 3"><circle cy="-31" r="7"/><rect x="-9" y="-23" width="18" height="24" rx="8"/></g><text y="16" text-anchor="middle" font-size="9" fill="var(--gold)" font-weight="700">Moi du futur</text></g>${me}</svg>
+<div class="row" style="justify-content:space-between;align-items:baseline"><div class="stage" style="margin:0">${idStage()}</div><b>${Math.round(p*100)} %</b></div><p class="mut" style="margin:6px 0 0">${say()}</p></section>`}
+function vDay(){const n=inWeek(cw()).length,ln=lastSleep();
+ const st4=[["seance",n+"/4","séances"],["read",rdToday()+"/"+st.rd,"pages"],["stretch",strWeek()+"/"+st.sgoal,"étirements"],["sleep",ln?fmtH(ln.h):"–","sommeil"]].map(x=>`<div onclick="go('${x[0]}')"><b>${x[1]}</b><span>${x[2]}</span></div>`).join("");
+ return frise()+`<section><div class="ch p">Mes résultats</div><div class="strip" style="margin:0">${st4}</div></section>`+vProg()}
+function vRead(){const ds=[];for(let i=6;i>=0;i--)ds.push(dstr(i));const v=ds.map(d=>st.rl[d]||0),lb=ds.map(d=>"DLMMJVS"[new Date(d+"T00:00:00").getDay()]);
+ const cur=st.books.filter(b=>!b.done),fin=st.books.filter(b=>b.done);
+ const opts=cur.map(b=>`<option value="${b.id}" ${st.rb==b.id?"selected":""}>${esc(b.t)}</option>`).join("");
+ const card=b=>{const n=b.ideas.length,pc=Math.min(100,b.read/b.pages*100),got=b.ideas.filter((_,i)=>b.read>=Math.ceil((i+1)/n*b.pages)).length;
+  const steps=b.ideas.map((t,i)=>{const u=Math.ceil((i+1)/n*b.pages),on=b.read>=u;return `<div class="step ${on?"on":""}"><div class="dotc">${on?"✓":ic("lock")}</div><div>${on?esc(t):`<span class="mut">Se débloque à la page ${u}</span>`}</div></div>`}).join("");
+  return `<section><div class="ch a">${esc(b.t)}</div>${b.a?`<p class="mut" style="margin:0 0 8px">${esc(b.a)}</p>`:""}<div class="row" style="justify-content:space-between"><b>${b.read} / ${b.pages} pages</b><span class="mut">${n?got+" / "+n+" idées apprises":""}</span></div><div class="bar" style="margin:8px 0 12px"><i style="width:${pc}%"></i></div>${b.g?`<p style="margin:0 0 12px"><b>Ce que ça va t’apporter</b><br><span class="mut">${esc(b.g)}</span></p>`:""}${n?`<div class="mut" style="margin-bottom:8px">Ce que j’apprends</div>${steps}`:`<p class="mut">Ajoute les idées clés du livre pour voir ce que tu apprends au fil des pages.</p>`}<details><summary class="mut">Idées clés du livre</summary><textarea id="ti${b.id}" rows="5" placeholder="Une idée par ligne">${esc(b.ideas.join("\n"))}</textarea><p><button class="alt" onclick="setIdeas(${b.id})">Enregistrer</button> <button class="alt" onclick="delBook(${b.id})">Supprimer</button></p></details></section>`};
+ return `<section><div class="ch a">Lecture du jour</div><div class="grid2" style="align-items:center">${ring(rdToday()/st.rd*100,rdToday()+"","sur "+st.rd+" pages","var(--acc)")}<div><div class="kpi">${rdStreak()} j</div><p class="mut">de suite à l’objectif<br>${totPages()} pages au total</p></div></div>
+${cur.length?`<div class="row" style="margin-top:12px"><select id="rbk" onchange="st.rb=this.value;save()">${opts}</select><input id="rpg" type="number" min="1" placeholder="Pages lues" style="max-width:110px"><button onclick="addPages()">Ajouter</button></div>`:`<p class="mut">Ajoute un livre pour commencer.</p>`}</section>
+<section><div class="ch s">7 derniers jours</div>${bars(v,Math.max(st.rd*1.6,...v),st.rd,lb,"var(--acc)")}<p class="mut">Ligne pointillée : ton objectif de ${st.rd} pages</p></section>
+${cur.map(card).join("")}
+<section><div class="ch g">Ajouter un livre</div><div class="row"><input id="bt" placeholder="Titre"><input id="bp" type="number" min="1" placeholder="Pages" style="max-width:90px"></div><textarea id="bi" rows="4" placeholder="Idées clés (optionnel), une par ligne"></textarea><p class="mut">Astuce : donne le titre à Claude, il te prépare la liste d’idées clés à coller ici.</p><button onclick="addBook()" style="width:100%">Ajouter ce livre</button></section>
+${fin.length?`<section><div class="ch g">Mon étagère</div>${fin.map(b=>`<div class="row" style="justify-content:space-between;padding:6px 0"><span>${esc(b.t)}</span><b>${b.pages} p.</b></div>`).join("")}</section>`:""}`}
+function addBook(){const t=document.getElementById("bt").value.trim(),p=+document.getElementById("bp").value;if(!t||!(p>0))return;const ideas=document.getElementById("bi").value.split("\n").map(x=>x.trim()).filter(Boolean);st.books.push({id:Date.now(),t,pages:p,read:0,ideas,done:""});save();render()}
+function setIdeas(id){const b=st.books.find(x=>x.id===id);b.ideas=document.getElementById("ti"+id).value.split("\n").map(x=>x.trim()).filter(Boolean);save();render()}
+function delBook(id){if(confirm("Supprimer ce livre ?")){st.books=st.books.filter(x=>x.id!==id);save();render()}}
+function addPages(){const id=+document.getElementById("rbk").value,n=Math.floor(+document.getElementById("rpg").value),b=st.books.find(x=>x.id===id);if(!b||!(n>0))return;const a=Math.min(n,b.pages-b.read);if(a<=0)return;b.read+=a;st.rl[today()]=(st.rl[today()]||0)+a;if(b.read>=b.pages)b.done=today();save();render()}
+function vStretch(){const L=VID||[],zs=["Tous","Front split","Middle split"],z=zs.includes(st.sz)?st.sz:"Tous",list=L.filter(v=>z==="Tous"||v.zone===z),sw=strWeek();
+ const chips=zs.map(k=>`<button class="${k===z?"in":""}" onclick="st.sz='${k}';save();render()">${k}</button>`).join("");
+ const dT=id=>st.sx.some(x=>x.d===today()&&x.id===id);
+ const cards=list.map(v=>{const pl=st.pv===v.id;return `<div class="vc"><div class="row" style="justify-content:space-between"><div><b>${esc(v.titre)}</b><div class="mut">${esc(v.zone||"")}${v.duree?" · "+esc(v.duree):""}</div></div>${pl?"":`<button onclick="st.pv='${esc(v.id)}';render()">Lancer</button>`}</div>${pl?`${v.yt?`<iframe src="https://www.youtube-nocookie.com/embed/${esc(ytid(v.yt))}?playsinline=1&rel=0&autoplay=1" title="${esc(v.titre)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:14px;margin:10px 0"></iframe>`:`<video src="${esc(v.fichier)}" controls autoplay playsinline style="margin:10px 0" onerror="this.outerHTML='<p class=mut>Vidéo introuvable : vérifie le nom du fichier.</p>'"></video>`}<button ${dT(v.id)?"disabled":""} onclick="doneStr('${esc(v.id)}')">${dT(v.id)?"Fait aujourd’hui":"J’ai fait cet étirement"}</button>`:""}</div>`}).join("");
+ return `<section><div class="ch g">Cette semaine</div><div class="grid2" style="align-items:center">${ring(sw/st.sgoal*100,sw+"/"+st.sgoal,"jours","var(--gold)")}<div><div class="kpi">${st.sx.length}</div><p class="mut">étirements faits<br>objectif : ${st.sgoal} jours par semaine</p></div></div></section>
+<section><div class="ch g">Mes vidéos</div><div class="pills">${chips}</div>${cards||`<p class="mut">${VID===null?"Chargement…":"Aucune vidéo pour l’instant. Ajoute-les avec le mode d’emploi ci-dessous."}</p>`}</section>
+<section><details><summary class="mut">Comment ajouter mes vidéos ?</summary><p class="mut">Pour chaque vidéo, ajoute une ligne dans <b>etirements.json</b> avec : id, titre, zone (Front split ou Middle split), duree et <b>yt</b> (le lien YouTube non répertorié de la vidéo). Pour une petite vidéo hébergée sur ton site, utilise <b>fichier</b> à la place de yt.</p></details></section>`}
+const ytid=u=>{const m=String(u).match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);return m?m[1]:String(u)};
+function doneStr(id){st.sx.push({d:today(),id});save();render()}
+function vBody(){const k=st.sub||"seance",f={seance:vSeance,stretch:vStretch,sleep:vSleep}[k]||vSeance;return `<div class="sgm">${[["seance","Séance"],["stretch","Étirements"],["sleep","Sommeil"]].map(t=>`<button class="${k===t[0]?"on":""}" onclick="go('${t[0]}')">${t[1]}</button>`).join("")}</div>`+f()}
+function muscu(){const L=st.me||[];
+ const pills=L.map((e,i)=>{const inn=st.plan.some(x=>x.z==="Muscu"&&x.e===e);return `<button class="${inn?"in":""}" onclick="addM(${i})">${inn?"✓ ":"+ "}${esc(e)}</button>`}).join("");
+ const gest=L.length?`<details><summary class="mut">Gérer ma liste</summary>${L.map((e,i)=>`<div class="row" style="justify-content:space-between;padding:4px 0"><span>${esc(e)}</span><button class="alt" onclick="delM(${i})" aria-label="Retirer de ma liste">✕</button></div>`).join("")}</details>`:"";
+ return `${pills?`<div class="pills">${pills}</div>`:`<p class="mut" style="margin-top:0">Ta liste de muscu est vide : ajoute tes exercices ci-dessous.</p>`}<div class="row"><input id="nm" placeholder="Ajouter un exercice de muscu"><button class="alt" onclick="newM()">Ajouter</button></div>${gest}`}
+function newM(e){e=(e||document.getElementById("nm").value).trim();if(!e)return;st.me=st.me||[];if(!st.me.includes(e))st.me=st.me.concat([e]);if(!st.plan.some(x=>x.z==="Muscu"&&x.e===e))st.plan.push({z:"Muscu",e,d:false});save();render()}
+function addM(i){const e=st.me[i],j=st.plan.findIndex(x=>x.z==="Muscu"&&x.e===e);if(j>=0)st.plan.splice(j,1);else st.plan.push({z:"Muscu",e,d:false});save();render()}
+function delM(i){const e=st.me[i];st.me=st.me.filter((_,j)=>j!==i);st.plan=st.plan.filter(x=>!(x.z==="Muscu"&&x.e===e));save();render()}
+function delK(i){const z=st.z,e=lst(z)[i];st.ze[z]=(st.ze[z]||[]).filter(x=>x!==e);st.plan=st.plan.filter(x=>!(x.z===z&&x.e===e));save();render()}
+function render(){if(NAV==="dom"&&["seance","stretch","sleep"].includes(st.tab)){st.sub=st.tab;st.tab="body"}
+ const T=NAVS[NAV],v={day:vDay,seance:vSeance,read:vRead,stretch:vStretch,sleep:vSleep,prog:vDay,set:vSet,body:vBody}[st.tab]||vDay,back=NAV==="five"&&st.tab==="sleep"?`<p><button class="alt" onclick="go('day')">← Retour</button></p>`:"";
+ document.getElementById("app").innerHTML=`<header><b>Future moi</b><button class="alt" onclick="go('set')" aria-label="Réglages">${ic("gear")}</button></header>`+back+v();
+ const nv=document.getElementById("nav");nv.className="n"+T.length;nv.innerHTML=T.map(t=>`<button class="${st.tab===t[0]?"on":""}" onclick="go('${t[0]}')"><span>${ic(t[1])}</span>${t[2]}</button>`).join("")}
+
+function vPig(){const pot=48*st.per,p=pot?Math.min(100,earned()/pot*100):0;
+ const b=st.bought.map(x=>typeof x==="string"?{n:x}:x).map(x=>`<div class="gift"><b>${ic("gift")}</b>${esc(x.n)}${x.p?"<br>"+x.p+" €":""}</div>`).join("")||`<p class="mut">Ton premier cadeau t’attend.</p>`;
+ return `<section><div class="ch g">Ma tirelire</div><div class="jarbox">${jar(p)}<div><div class="big">${bal()} €</div><p class="mut">${earned()} € gagnés sur ${pot} € possibles<br>${st.per} € par séance</p></div></div></section>
+<section><div class="ch g">Mon étagère de cadeaux</div><div class="shelf">${b}</div></section>`}
+function vWish(){const w=st.wish.map(x=>{const fv=st.fav.includes(x.id),r=Math.min(100,Math.max(0,bal()/x.p*100)),ok=bal()>=x.p;return `<div class="wc"><div class="row" style="justify-content:space-between"><span>${esc(x.n)} <b>${x.p} €</b></span><div class="row"><button class="${fv?"":"alt"}" onclick="fav(${x.id})" aria-label="Envie de la semaine">${ic("star")}</button><button ${ok?"":"disabled"} onclick="buyId(${x.id})">${ok?ic("gift")+" Me l’offrir":"Il manque "+Math.ceil(x.p-bal())+" €"}</button><button class="alt" onclick="delW(${x.id})" aria-label="Supprimer">✕</button></div></div><div class="bar" style="margin-top:6px"><i style="width:${r}%"></i></div></div>`}).join("")||`<p class="mut">Ajoute ce qui te ferait plaisir : livre, maquillage, trouvaille Vinted…</p>`;
+ return `<section><div class="ch g">Mes envies</div><p class="mut" style="margin-top:0">Appuie sur l’étoile pour choisir jusqu’à 3 envies de la semaine. Elles s’affichent sur ta page Séance.</p>${w}</section>
+<section><div class="ch g">Ajouter une envie</div><div class="row"><input id="wn" placeholder="Envie (ex. un livre)"><input id="wp" type="number" min="1" placeholder="Prix €" style="max-width:90px"><button onclick="addW()">Ajouter</button></div></section>`}
+function fav(id){if(st.fav.includes(id))st.fav=st.fav.filter(x=>x!==id);else{if(st.fav.length>=3)st.fav=st.fav.slice(1);st.fav=st.fav.concat([id])}save();render()}
+function buyId(id){const i=st.wish.findIndex(x=>x.id===id);if(i<0)return;const x=st.wish[i];if(bal()<x.p)return;st.spent+=x.p;st.bought.push({n:x.n,p:x.p});st.wish.splice(i,1);st.fav=st.fav.filter(f=>f!==id);save();render()}
+function delW(id){st.wish=st.wish.filter(x=>x.id!==id);st.fav=st.fav.filter(f=>f!==id);save();render()}
+function gains(){const w=cw(),sess=inWeek(w).filter(x=>!x.j).length,got=sess*st.per,left=Math.max(0,4-inWeek(w).length)*st.per,av=bal()+left;
+ const cards=st.fav.map(id=>st.wish.find(x=>x.id===id)).filter(Boolean).map(x=>{const r=Math.min(100,Math.max(0,av/x.p*100)),ok=bal()>=x.p;return `<div class="wc"><div class="row" style="justify-content:space-between"><span>${esc(x.n)} <b>${x.p} €</b></span><span class="mut">${ok?"Déjà possible":av>=x.p?"À portée cette semaine":"Il manque "+Math.ceil(x.p-av)+" €"}</span></div><div class="bar" style="margin-top:6px"><i style="width:${r}%"></i></div></div>`}).join("");
+ return `<section><div class="ch g">Mes gains de la semaine</div><div class="grid2" style="align-items:center"><div><div class="kpi">${got} €</div><p class="mut">gagnés cette semaine</p></div><div><div class="kpi">+${left} €</div><p class="mut">encore possibles</p></div></div>${cards||`<p class="mut">Choisis jusqu’à 3 envies de la semaine dans l’onglet Envies : elles s’afficheront ici.</p>`}</section>`}
+function vSeance(){const k=st.ss||"seance",f={seance:vSeanceMain,cagnotte:vPig,envies:vWish}[k]||vSeanceMain;return `<div class="sgm">${[["seance","Séance"],["cagnotte","Cagnotte"],["envies","Envies"]].map(t=>`<button class="${k===t[0]?"on":""}" onclick="st.ss='${t[0]}';save();render()">${t[1]}</button>`).join("")}</div>`+(k==="seance"?gains():"")+f()}
+function add(z,i){const e=lst(z)[i],j=st.plan.findIndex(x=>x.z===z&&x.e===e);if(j>=0)st.plan.splice(j,1);else st.plan.push({z,e,d:false});save();render()}
+function addC(){const v=document.getElementById("ne").value.trim();if(!v)return;(st.ze[st.z]=st.ze[st.z]||[]).push(v);st.plan.push({z:st.z,e:v,d:false});save();render()}
+function tg(i){st.plan[i].d=!st.plan[i].d;save();render()}
+function rm(i){st.plan.splice(i,1);save();render()}
+function done(){const e=st.plan.filter(x=>x.d).map(x=>({z:x.z,e:x.e}));if(!e.length)return;st.s.push({d:today(),e});st.plan=[];save();render()}
+function joker(){st.s.push({d:today(),j:1});save();render()}
+function buy(i){const x=st.wish[i];if(bal()<x.p)return;st.spent+=x.p;st.bought.push({n:x.n,p:x.p});st.wish.splice(i,1);save();render()}
+function addW(){const n=document.getElementById("wn").value.trim(),p=+document.getElementById("wp").value;if(!n||!p)return;st.wish.push({id:Date.now()*1000+Math.floor(Math.random()*1000),n,p});save();render()}
+render();
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script></body></html>
